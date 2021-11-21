@@ -1,0 +1,76 @@
+\chapter{Introduction}
+    
+\section{Motivation}
+
+\section{Scope of our topic}
+    Our VA application will be composed of four components:
+    \begin{itemize}
+        \item Trigger word detection (TWD)
+        \item Speech recognition (SR)
+        \item Natural language understanding (NLU)
+        \item Text-to-speech (TTS)
+    \end{itemize}
+    The purpose of each follows:
+    \begin{enumerate}
+        \item TWD: The trigger word detection acts a switch to the application. When not in use, the application will be passively listening in the background through the TWD system. When the user says the trigger word, the TWD system will send a signal to other components, activating them and allow the user to engage in conversion with the VA.
+        \item SR: When the application is in its active state, voice commands from the user will be transcribed into text through this component. For this project we limit the scope of the SR system to transcribing English only.
+        \item NLU: This component interprets the commands from the user using a Machine Learning model trained to detect Intent and Slot-filling. It determines, from the command given, what job to perform and what information has been provided for such job.
+        \item TTS: Allows the application to response back to the user verbally, helping to create a completed user experience.
+    \end{enumerate}
+    
+    Each component listed above is in itself a topic that has been researched and studied extensively in the field, from both independent researchers and major corporations such as Google, Apple, etc.In our project we aim to combine the result of studies in the fields into a complete and functional product.
+    
+    Due to time constraints we can only implement the TWD and NLU component ourselves. The other components(SR and TTS) will be included through the use of open-source codes or public libraries. As mentioned above, the VA is limited to only operate in English, although the TWD will allow the use of any arbitrary  word/phrase as a trigger. The sections below contain the lists of objective we hope to achieve for the application as a whole, as well as individual components.
+
+\subsection{Overall application}
+    The ultimate objective of this project is the creation of a convenient, easy-to-use VA application that provides users with the standard of features (i.e. looking up topics, scheduling, unit and currency conversion, etc.) and also allows room for custom commands to fit their needs.
+    
+    Below is the list of goals we hope to achieve with our application overall:
+    \begin{itemize}
+        \item Lightweight, low resource consumption
+        \item Quick and easy setup
+        \item Provide standards features of Voice activation, Voice searching and other Voice commands
+        \item Allow custom commands from the user
+    \end{itemize}
+\subsection{Trigger word detection}
+    The trigger word system is the switch that starts the conversation between the user and the VA. Since it needs to constantly listen for the trigger, our first constraint on it will have to be power and resource consumption. Errors in this type of systems often fall into two categories: Not detecting the correct utterances and Detecting incorrect ones. Addressing both would be a tall order, therefore we decided to priority preventing the latter case, seeing how most finds a VA triggering in the middle of an unrelated conversation vastly more infuriating than having to repeat the trigger word an extra 1-2 time(s).  In mathematical terms, we are aiming for decent precision without compromising too much overall recall.
+    
+    Lastly, the system needs to be able to set up itself quickly with only few recordings from the user as samples. We also aim for the language independence, not restricting the user to any specific wake word/phrase.
+
+    To sum up, out Trigger word system has to achieve to  following:
+    \begin{itemize}
+        \item Low power and resource consumption
+        \item Speaker-dependant detection for personal use
+        \item Arbitrary wake word
+        \item Quick setup with user recorded samples.
+        \item Achieve high precision ( >=80\%) and acceptable recall (>=50\%)
+    \end{itemize}
+\subsection{NLU}
+When designing a virtual assistant, one of the most crucial tasks is to create and train a model for NLU (Natural language understanding) to process the user's input. The first step to accomplish this task is converting speech to text since our users will be communicating with our virtual assistant via speech. However, due to the limitations of our resources, we will not attempt to tackle this problem. Instead, we will be using a python library to convert speech to text (SpeechRecognition) to process the user's command.
+\newline
+\indent The next step is to create and train a model that can understand the user's commands. Understanding the user's commands means that our model has to accomplish two main jobs. It has to be able to detect the user's intention and extract key information in the user's command to carry out the task. The baseline for our model is that it should be able to understand and carry out tasks that fall under the following list of intentions:
+\begin{itemize}
+    \item Query: Perform a web search of the topic 
+    \item Definition: Read out definition of word/ phrases
+    \item News: Read out some news headline
+    \item Alarm: set an alarm
+    \item Timer: set a timer
+    \item Math: perform calculation
+    \item Currency exchange
+    \item Unit conversion
+    \item Calendar: read out events on calendar
+    \item Calendar update: Make changes to calendar
+    \item Play song: play a song
+    \item What song: list out current song
+    \item Next song
+    \item Weather: get forecast
+    \item Date: get current date
+    \item Time: get current time
+    \item Tell joke
+    \item Answer yes/no question
+    \item Repeat
+    \item Spelling
+    \item Random: get random number  
+    \item Launch: open program/ website
+    \item Hint: list tasks the app can do
+\end{itemize}
